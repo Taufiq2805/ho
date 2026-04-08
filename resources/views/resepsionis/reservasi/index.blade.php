@@ -801,15 +801,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function filterKamarByTipe() {
-    if (!kamarSelect) return;
-    kamarSelect.value = "";
-    Array.from(kamarSelect.options).forEach(o => {
-      const tipeMatch = o.dataset.tipe === tipeSelect.value || o.value === "";
-      const tersedia  = (o.dataset.status || '').toLowerCase() !== 'terisi';
-      o.hidden = !(tipeMatch && tersedia);
-    });
-  }
+  if (!kamarSelect) return;
 
+  kamarSelect.value = "";
+
+  Array.from(kamarSelect.options).forEach(o => {
+    const tipeMatch = o.dataset.tipe === tipeSelect.value || o.value === "";
+    const tersedia  = (o.dataset.status || '').toLowerCase() === 'tersedia';
+
+    o.hidden = !(tipeMatch && tersedia);
+  });
+}
   async function fetchFotoTipe(tipeId) {
     if (!previewFoto) return;
     if (!tipeId) { previewFoto.style.display = "none"; return; }

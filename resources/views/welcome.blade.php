@@ -322,7 +322,7 @@
                 <nav class="nav">
                     <div class="logo">
                         <i class="fa-solid fa-hotel"></i>
-                        Grand Luxury Hotel
+                        Grand Luxury Hotell
                     </div>
                     <div class="nav-actions">
                         <a href="#fitur">Fitur</a>

@@ -18,7 +18,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&ampdisplay=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <!-- Icons -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/iconify-icons.css') }}" />
@@ -35,7 +35,7 @@
     <!-- DataTables Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 
-    @stack('styles') {{-- Tambahan stylesheet per halaman --}}
+    @stack('styles')
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
@@ -46,16 +46,19 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+
             <!-- Sidebar -->
             @include('layouts.components.sidebar')
 
-            <!-- Layout container -->
+            <!-- Layout page -->
             <div class="layout-page">
+
                 <!-- Navbar -->
                 @include('layouts.components.navbar')
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
+
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row gy-6">
@@ -98,6 +101,35 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-    @stack('scripts') {{-- Tambahan script per halaman --}}
+    @stack('scripts')
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleBtns = document.querySelectorAll('.layout-menu-toggle');
+            const menu = document.getElementById('layout-menu');
+            const html = document.documentElement;
+
+            // Toggle sidebar saat tombol hamburger ditekan
+            toggleBtns.forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    html.classList.toggle('layout-menu-expanded');
+                });
+            });
+
+            // Klik di luar sidebar = tutup
+            document.addEventListener('click', function (e) {
+                if (
+                    html.classList.contains('layout-menu-expanded') &&
+                    menu &&
+                    !menu.contains(e.target) &&
+                    !e.target.closest('.layout-menu-toggle')
+                ) {
+                    html.classList.remove('layout-menu-expanded');
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

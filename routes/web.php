@@ -20,11 +20,9 @@ use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\MakananController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\ResepsionisInformasiController;
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index']);
 
 Auth::routes();
 

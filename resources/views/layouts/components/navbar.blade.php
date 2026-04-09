@@ -1,6 +1,6 @@
 <nav class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
  <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
-   <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+   <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)" id="hamburger-btn">
      <i class="icon-base ri ri-menu-line icon-md"></i>
    </a>
  </div>
@@ -35,27 +35,6 @@
          <li>
            <div class="dropdown-divider my-1"></div>
          </li>
-         <!-- <li>
-           <a class="dropdown-item" href="#">
-             <i class="icon-base ri ri-user-line icon-md me-3"></i>
-             <span>My Profile</span>
-           </a>
-         </li>
-         <li>
-           <a class="dropdown-item" href="#">
-             <i class="icon-base ri ri-settings-4-line icon-md me-3"></i>
-             <span>Settings</span>
-           </a>
-         </li>
-         <li>
-           <a class="dropdown-item" href="#">
-             <span class="d-flex align-items-center align-middle">
-               <i class="flex-shrink-0 icon-base ri ri-bank-card-line icon-md me-3"></i>
-               <span class="flex-grow-1 align-middle ms-1">Billing Plan</span>
-               <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-             </span>
-           </a>
-         </li> -->
          <li>
            <div class="dropdown-divider my-1"></div>
          </li>
@@ -79,3 +58,39 @@
    </ul>
  </div>
 </nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburger = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('layout-menu');
+    const html = document.documentElement;
+    const overlay = document.querySelector('.layout-overlay');
+
+    if (hamburger) {
+        hamburger.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            html.classList.toggle('layout-menu-expanded');
+        });
+    }
+
+    // Klik overlay = tutup sidebar
+    if (overlay) {
+        overlay.addEventListener('click', function () {
+            html.classList.remove('layout-menu-expanded');
+        });
+    }
+
+    // Klik di luar sidebar = tutup
+    document.addEventListener('click', function (e) {
+        if (
+            html.classList.contains('layout-menu-expanded') &&
+            menu &&
+            !menu.contains(e.target) &&
+            !e.target.closest('#hamburger-btn')
+        ) {
+            html.classList.remove('layout-menu-expanded');
+        }
+    });
+});
+</script>

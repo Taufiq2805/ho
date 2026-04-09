@@ -1,10 +1,12 @@
 <?php
 
 use App\Models\Kamar;
+use App\Models\TipeKamar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReservasiController;
+use App\Http\Controllers\Api\InformasiController;
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -28,10 +30,26 @@ Route::middleware('auth:sanctum')->group(function () {
         ]);
     });
 
+    Route::get('/kamar/tersedia', function () {
+        return response()->json([
+            'status' => true,
+            'data'   => Kamar::with('tipe')
+                            ->where('status', 'tersedia')
+                            ->get()
+        ]);
+    });
+
     Route::get('/kamar', function () {
         return response()->json([
             'status' => true,
             'data'   => Kamar::all()
+        ]);
+    });
+
+    Route::get('/tipe-kamar', function () {
+        return response()->json([
+            'status' => true,
+            'data'   => TipeKamar::all()
         ]);
     });
 
@@ -41,3 +59,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reservasi', [ReservasiController::class, 'store']);
     Route::put('/reservasi/{id}/checkout', [ReservasiController::class, 'checkout']);
 });
+// Informasi
+Route::get('/informasi', [InformasiController::class, 'index']);
+Route::get('/informasi/{id}', [InformasiController::class, 'show']);

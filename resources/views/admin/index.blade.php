@@ -74,7 +74,7 @@
                 <div class="stat-card__value">{{ $totalKamarTerisi }}</div>
                 <div class="stat-card__bar"><div class="stat-card__fill" style="width:55%"></div></div>
             </div>
-            <a href="#" class="stat-card__link">
+            <a href="{{ route('admin.riwayat.index') }}" class="stat-card__link">
                 Lihat Detail <i class="fas fa-chevron-right ms-1"></i>
             </a>
         </div>
@@ -115,7 +115,7 @@
 {{-- QUICK MENU --}}
 <div class="row g-4">
 
-    <div class="col-md-4">
+    <div class="col-md-6">
         <a href="{{ route('admin.tipekamar.index') }}" class="text-decoration-none">
             <div class="quick-card">
                 <div class="quick-card__orb quick-card__orb--indigo"></div>
@@ -133,7 +133,7 @@
         </a>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
         <a href="{{ route('admin.kamar.index') }}" class="text-decoration-none">
             <div class="quick-card">
                 <div class="quick-card__orb quick-card__orb--emerald"></div>
@@ -143,24 +143,6 @@
                 <div class="quick-card__content">
                     <h6 class="quick-card__title">Kamar</h6>
                     <p class="quick-card__desc">Kelola unit kamar & ketersediaan</p>
-                </div>
-                <div class="quick-card__arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-md-4">
-        <a href="#" class="text-decoration-none">
-            <div class="quick-card quick-card--disabled">
-                <div class="quick-card__orb quick-card__orb--amber"></div>
-                <div class="quick-card__icon quick-card__icon--amber">
-                    <i class="fas fa-receipt"></i>
-                </div>
-                <div class="quick-card__content">
-                    <h6 class="quick-card__title">Transaksi</h6>
-                    <p class="quick-card__desc">Riwayat pembayaran & pemesanan</p>
                 </div>
                 <div class="quick-card__arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -258,13 +240,11 @@
         box-shadow: 0 20px 40px -10px var(--c-shadow, rgba(0,0,0,.25));
     }
 
-    /* colours */
     .stat-card--indigo  { background: linear-gradient(135deg, #6366f1, #4f46e5); --c-shadow: rgba(99,102,241,.4); }
     .stat-card--emerald { background: linear-gradient(135deg, #10b981, #059669); --c-shadow: rgba(16,185,129,.4); }
     .stat-card--amber   { background: linear-gradient(135deg, #f59e0b, #d97706); --c-shadow: rgba(245,158,11,.4); }
     .stat-card--sky     { background: linear-gradient(135deg, #0ea5e9, #0284c7); --c-shadow: rgba(14,165,233,.4); }
 
-    /* glow blob */
     .stat-card__glow {
         position: absolute;
         top: -40px; right: -40px;
@@ -274,7 +254,6 @@
         pointer-events: none;
     }
 
-    /* icon */
     .stat-card__icon-wrap { display: flex; }
     .stat-card__icon {
         width: 44px; height: 44px;
@@ -285,7 +264,6 @@
         backdrop-filter: blur(6px);
     }
 
-    /* body */
     .stat-card__body { flex: 1; }
     .stat-card__label {
         display: block;
@@ -304,7 +282,6 @@
     }
     .stat-card__value--sm { font-size: 1.35rem; }
 
-    /* progress bar */
     .stat-card__bar {
         margin-top: .75rem;
         height: 4px;
@@ -319,7 +296,6 @@
         transition: width 1.2s cubic-bezier(.25,.8,.25,1);
     }
 
-    /* link */
     .stat-card__link {
         font-size: .78rem;
         font-weight: 600;
@@ -377,10 +353,7 @@
         opacity: 1;
         transform: translateX(0);
     }
-    .quick-card--disabled { opacity: .55; cursor: default; }
-    .quick-card--disabled:hover { transform: none; box-shadow: none; border-color: var(--c-border); }
 
-    /* orb */
     .quick-card__orb {
         position: absolute;
         top: -30px; right: -30px;
@@ -391,9 +364,7 @@
     }
     .quick-card__orb--indigo  { background: var(--c-indigo); }
     .quick-card__orb--emerald { background: var(--c-emerald); }
-    .quick-card__orb--amber   { background: var(--c-amber); }
 
-    /* icon */
     .quick-card__icon {
         flex-shrink: 0;
         width: 48px; height: 48px;
@@ -403,9 +374,7 @@
     }
     .quick-card__icon--indigo  { background: rgba(99,102,241,.1);  color: var(--c-indigo); }
     .quick-card__icon--emerald { background: rgba(16,185,129,.1); color: var(--c-emerald); }
-    .quick-card__icon--amber   { background: rgba(245,158,11,.1); color: var(--c-amber); }
 
-    /* content */
     .quick-card__content { flex: 1; }
     .quick-card__title {
         font-size: .95rem;
@@ -419,7 +388,6 @@
         margin: 0;
     }
 
-    /* arrow */
     .quick-card__arrow {
         color: var(--c-muted);
         opacity: 0;
@@ -440,7 +408,6 @@
 </style>
 
 <script>
-    // Live date display
     (function () {
         const el = document.getElementById('live-date');
         if (!el) return;
